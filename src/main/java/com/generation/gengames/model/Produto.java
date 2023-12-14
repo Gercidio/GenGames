@@ -2,11 +2,14 @@ package com.generation.gengames.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -46,6 +49,18 @@ public class Produto {
 	@NotBlank(message = "O nome do console é obrigatório!")
 	@Size(min = 5, max = 100, message = "O nome do console deve conter entre 5 e 100 caracteres!")
 	private String console;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produtos")
+	private Categoria categoria;
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 	public Long getId() {
 		return id;
