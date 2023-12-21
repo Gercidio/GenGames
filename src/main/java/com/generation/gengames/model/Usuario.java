@@ -1,5 +1,6 @@
 package com.generation.gengames.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +29,9 @@ public class Usuario {
 	@NotNull(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
 
+	@NotNull(message = "O atributo Data de Nascimento é obrigatório!")
+	LocalDate dataNascimento;
+	
 	@NotNull(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String usuario;
@@ -91,5 +95,19 @@ public class Usuario {
 	public void setPostagem(List<Produto> produto) {
 		this.produto = produto;
 	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
+	}
+	
+	
 
 }

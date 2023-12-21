@@ -1,5 +1,7 @@
 package com.generation.gengames.model;
 
+import java.time.LocalDate;
+
 public class UsuarioLogin {
 
 	private Long id;
@@ -8,7 +10,7 @@ public class UsuarioLogin {
 	private String senha;
 	private String foto;
 	private String token;
-	
+	private LocalDate dataNascimento;
 	
 	public Long getId() {
 		return id;
@@ -45,6 +47,12 @@ public class UsuarioLogin {
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	
 	
