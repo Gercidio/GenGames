@@ -28,6 +28,8 @@ public class UsuarioService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    
+    
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 
 		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
@@ -78,7 +80,6 @@ public class UsuarioService {
                 // Preenche o Objeto usuarioLogin com os dados encontrados 
 			    usuarioLogin.get().setId(usuario.get().getId());
                 usuarioLogin.get().setNome(usuario.get().getNome());
-                usuarioLogin.get().setDataNascimento(usuario.get().getDataNascimento());
                 usuarioLogin.get().setFoto(usuario.get().getFoto());
                 usuarioLogin.get().setToken(gerarToken(usuarioLogin.get().getUsuario()));
                 usuarioLogin.get().setSenha("");

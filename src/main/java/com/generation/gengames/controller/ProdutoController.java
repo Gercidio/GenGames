@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.generation.gengames.model.Produto;
 import com.generation.gengames.repository.CategoriaRepository;
 import com.generation.gengames.repository.ProdutoRepository;
+import com.generation.gengames.service.ProdutoService;
 
 import jakarta.validation.Valid;
 
@@ -35,6 +36,8 @@ public class ProdutoController {
 	private ProdutoRepository produtoRepository;
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	@Autowired
+	private ProdutoService produtoService;
 	
 	@GetMapping
 	public ResponseEntity<List<Produto>> getAll(){
@@ -91,6 +94,13 @@ public class ProdutoController {
     @GetMapping("/maior/{preco}")
     public ResponseEntity<List<Produto>> getByPrecoMaior(@PathVariable BigDecimal preco) {
         return ResponseEntity.ok(produtoRepository.findAllByPrecoGreaterThan(preco));
+    }
+    
+    @PutMapping("curtir/{id}")
+   public  ResponseEntity<Produto> curtir(@PathVariable Long id){
+    	return produtoService.curtir(id)
+    			.map(resposta -> ResponseEntity.ok(resposta))
+    			.orElse(ResponseEntity.badRequest().build());
     }
 	
 }

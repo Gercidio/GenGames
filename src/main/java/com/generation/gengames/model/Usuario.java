@@ -3,9 +3,11 @@ package com.generation.gengames.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,9 +30,6 @@ public class Usuario {
 
 	@NotNull(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
-
-	@NotNull(message = "O atributo Data de Nascimento é obrigatório!")
-	LocalDate dataNascimento;
 	
 	@NotNull(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
@@ -42,7 +41,12 @@ public class Usuario {
 
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
-
+	
+	@NotNull(message = "A data de nascimento do usuario é obrigatória")
+	@Column (name = "data_nascimento")
+	@JsonFormat(pattern = "yyy-MM-dd")
+	LocalDate dataNascimento;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Produto> produto;
@@ -94,14 +98,6 @@ public class Usuario {
 
 	public void setPostagem(List<Produto> produto) {
 		this.produto = produto;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public void setProduto(List<Produto> produto) {

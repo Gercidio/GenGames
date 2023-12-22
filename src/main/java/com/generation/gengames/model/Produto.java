@@ -50,6 +50,9 @@ public class Produto {
 	@Size(min = 5, max = 100, message = "O nome do console deve conter entre 5 e 100 caracteres!")
 	private String console;
 	
+	@Column(columnDefinition = "integer default 0")
+	private int curtir;
+	
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
 	private Categoria categoria;
@@ -120,6 +123,14 @@ public class Produto {
 
 	public void setConsole(String console) {
 		this.console = console;
+	}
+
+	public int getCurtir() {
+		return curtir;
+	}
+
+	public void setCurtir(int curtir) {
+		this.curtir = curtir;
 	}	
 	
 
